@@ -161,13 +161,15 @@ public static final String PREFS_NAME = "YunizMtSaves";
 	
 	private RevMob revmob;
 	
+	int sdk;
+	
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_game);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		int sdk = android.os.Build.VERSION.SDK_INT;
+		sdk = android.os.Build.VERSION.SDK_INT;
 		
 		//----------detect device setting and adapt environment
 		Display display = getWindowManager().getDefaultDisplay();
@@ -265,7 +267,7 @@ public static final String PREFS_NAME = "YunizMtSaves";
 		    InputStream ims = getAssets().open("menu.jpg");
 		    Drawable d = Drawable.createFromStream(ims, null);
 		    
-		    InputStream ims2 = getAssets().open("stage_1.jpg");
+		    InputStream ims2 = getAssets().open("stage_" + generateNumber(1,3) + ".jpg");
 		    Drawable d2 = Drawable.createFromStream(ims2, null);
 		    
 		    InputStream ims3 = getAssets().open("intro.jpg");
@@ -478,7 +480,7 @@ public static final String PREFS_NAME = "YunizMtSaves";
 		
 		/*----RevMob Ads----*/
 		revmob = RevMob.start(this);
-revmob.setTestingMode(RevMobTestingMode.WITH_ADS);
+//revmob.setTestingMode(RevMobTestingMode.WITH_ADS);
 		revmob.showFullscreen(this);
 		
 		RevMobBanner banner = revmob.createBanner(this);
@@ -537,6 +539,26 @@ revmob.setTestingMode(RevMobTestingMode.WITH_ADS);
 		animSet.addAnimation(animationLoc);
 		
 		titanSelect.startAnimation(animSet);
+	}
+	
+	@SuppressLint("NewApi")
+	public void updateStageImage(){
+		InputStream ims2;
+		
+		try {
+			ims2 = getAssets().open("stage_" + generateNumber(1,3) + ".jpg");
+			Drawable d2 = Drawable.createFromStream(ims2, null);
+			
+			if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+		    	gameStage1.setBackgroundDrawable(d2);
+		    } else {
+		    	gameStage1.setBackground(d2);
+		    }
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	
 	public void moveHuman(float arg0, float arg1){
@@ -936,6 +958,8 @@ revmob.setTestingMode(RevMobTestingMode.WITH_ADS);
 	public void playBtn2(View v) {
 		buttonClicks();
 		
+		updateStageImage();
+		
 		gameScore.setText(totalHits + " x");
 		
 		hallOfFameBoard.setVisibility(View.INVISIBLE);
@@ -952,6 +976,8 @@ revmob.setTestingMode(RevMobTestingMode.WITH_ADS);
 	
 	public void rePlayBtn(View v) {
 		buttonClicks();
+		
+		updateStageImage();
 		
 		gameScore.setText(totalHits + " x");
 		

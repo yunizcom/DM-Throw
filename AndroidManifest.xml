@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yuniz.despicablemethrow"
-    android:versionCode="2"
-    android:versionName="1.1" >
+    android:versionCode="4"
+    android:versionName="1.3" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -38,7 +38,7 @@
 	              android:theme="@android:style/Theme.Translucent"
 	              android:configChanges="keyboardHidden|orientation">
 	    </activity>
-	    <meta-data android:name="com.revmob.app.id" android:value="526c7f8a1ea699d00000002bx"/>
+	    <meta-data android:name="com.revmob.app.id" android:value="527ad7a5b2b420aa3f000014"/>
     </application>
 
 </manifest>
