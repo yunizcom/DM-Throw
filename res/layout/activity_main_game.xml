@@ -593,7 +593,7 @@
             android:background="@null"
             android:minHeight="10dp"
             android:onClick="openURL"
-            android:text="Copyright by Universal Pictures | Developed by Yuniz.com"
+            android:text="Copyright and Developed by Yuniz.com"
             android:textColor="#ffffff"
             android:textSize="10dp"
             android:textStyle="bold" />
